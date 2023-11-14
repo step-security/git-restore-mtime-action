@@ -1,0 +1,46 @@
+name: "Test Suite"
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to run tests on"
+        required: true
+        default: "main"
+
+jobs:
+  tests:
+    name: "Test ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-20.04, windows-latest, macos-latest]
+
+    steps:
+      # Checkout the requested branch
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          ref: "${{ github.event.inputs.branch }}"
+          fetch-depth: 0
+
+      # Fix timestamps
+      - name: restore timestamps
+        uses: ./
+        with:
+          STEPSECURITY_API_KEY: ${{ secrets.STEPSECURITY_API_KEY }}
+
+      # Check timestamps
+      - name: validate
+        shell: bash
+        run: |
+          e=1568920506
+          if [[ "$OSTYPE" == *'darwin'* ]]; then
+            t=$(stat -f %m LICENSE)
+          else
+            t=$(stat --format="%Y" LICENSE)
+          fi
+          if [[ $t -ne $e ]]; then
+            echo "timestamp for LICENSE was '$t'; expected 1568919521"
+            exit 1
+          fi

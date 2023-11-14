@@ -1,0 +1,22 @@
+name: "git-restore-mtime"
+description: "Restore file's modified time (timestamp) based on git commits"
+branding:
+  icon: "check-square"
+  color: "green"
+inputs:
+  STEPSECURITY_API_KEY:
+    description: "API key for validation"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Validate API Key
+      shell: bash
+      run: |
+        # TODO: Validate API Key
+        echo "Invalid API Key"
+
+    - name: Run git-restore-mtime
+      shell: bash
+      run: |
+        $GITHUB_ACTION_PATH/git-restore-mtime
