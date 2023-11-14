@@ -34,13 +34,13 @@ jobs:
       - name: validate
         shell: bash
         run: |
-          e=1568920506
+          e=1699988248
           if [[ "$OSTYPE" == *'darwin'* ]]; then
             t=$(stat -f %m LICENSE)
           else
             t=$(stat --format="%Y" LICENSE)
           fi
           if [[ $t -ne $e ]]; then
-            echo "timestamp for LICENSE was '$t'; expected 1568919521"
+            echo "timestamp for LICENSE was '$t'; expected 1699988248"
             exit 1
           fi
