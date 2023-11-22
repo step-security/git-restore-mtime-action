@@ -35,8 +35,6 @@ jobs:
       # Fix timestamps
       - name: restore timestamps
         uses: ./
-        with:
-          STEPSECURITY_API_KEY: ${{ secrets.STEPSECURITY_API_KEY }}
 
       # Check timestamps
       - name: validate
