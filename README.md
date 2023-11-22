@@ -61,8 +61,6 @@ jobs:
       # Fix timestamps
       - name: restore timestamps
         uses: step-security/git-restore-mtime-action@v1
-        with:
-          STEPSECURITY_API_KEY: ${{ secrets.STEPSECURITY_API_KEY }}
 
       # Upload to S3
       - name: sync s3
