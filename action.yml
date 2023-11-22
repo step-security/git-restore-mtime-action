@@ -20,12 +20,10 @@ runs:
           if [ -z "$RESPONSE" ] || [ "$RESPONSE" == "000" ] || [ $CURL_EXIT_CODE -ne 0 ]; then
             echo "Timeout or API not reachable. Continuing to next step."
           else
-            echo "Subscription is not valid. Failing the step."
+            echo "Subscription is not valid. Reach out to support@stepsecurity.io"
             exit 1
           fi
         fi
-
-        echo "Subscription validation successful."
 
     - name: Run git-restore-mtime
       shell: bash
