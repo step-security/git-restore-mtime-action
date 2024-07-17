@@ -60,7 +60,7 @@ jobs:
 
       # Fix timestamps
       - name: restore timestamps
-        uses: step-security/git-restore-mtime-action@v1
+        uses: step-security/git-restore-mtime-action@v2
 
       # Upload to S3
       - name: sync s3
