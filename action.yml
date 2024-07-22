@@ -1,8 +1,13 @@
-name: "git-restore-mtime"
+name: 'git-restore-mtime'
 description: "Restore file's modified time (timestamp) based on git commits"
+inputs:
+  working-directory:
+    description: "Where to run the action"
+    required: false
+    default: '.'
 branding:
-  icon: "check-square"
-  color: "green"
+  icon: 'clock'
+  color: 'orange'
 runs:
   using: "composite"
   steps:
@@ -28,4 +33,4 @@ runs:
     - name: Run git-restore-mtime
       shell: bash
       run: |
-        $GITHUB_ACTION_PATH/git-restore-mtime
+        cd "${{ inputs.working-directory }}" && "$GITHUB_ACTION_PATH"/git-restore-mtime
