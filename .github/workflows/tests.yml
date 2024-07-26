@@ -22,7 +22,7 @@ jobs:
     steps:
     # Checkout the requested branch
     - name: Harden Runner
-      uses: step-security/harden-runner@1b05615854632b887b69ae1be8cbefe72d3ae423 # v2.6.0
+      uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
       with:
         egress-policy: audit
 
