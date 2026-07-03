@@ -1,0 +1,18 @@
+{
+   "schema_version": "1",
+   "onboarding_type": "copied",
+   "archived": false,
+   "maintained_action_name": "step-security/git-restore-mtime-action",
+   "upstream_full_repo_name": "chetan/git-restore-mtime-action",
+   "action_type": "composite",
+   "last_release": {
+     "tag_name": "v2.1.2",
+     "created_at": "2026-04-20T10:33:55Z",
+     "published_at": "2026-04-21T00:05:23Z"
+   },
+   "sync": {
+     "ignore_presets": [
+       "defaults_v1"
+     ]
+   }
+ }
