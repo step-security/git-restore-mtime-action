@@ -1,20 +1,26 @@
-name: 'git-restore-mtime'
-description: "Restore file's modified time (timestamp) based on git commits"
+name: git-restore-mtime
+description: Restore file's modified time (timestamp) based on git commits
+author: step-security
 inputs:
   working-directory:
-    description: "Where to run the action"
+    description: Where to run the action
     required: false
-    default: '.'
+    default: .
+  args:
+    description: Command line arguments to pass to git-restore-mtime
+    required: false
+    default: ""
 branding:
-  icon: 'clock'
-  color: 'orange'
+  icon: clock
+  color: orange
 runs:
-  using: "composite"
+  using: composite
   steps:
     - name: Subscription check
       env:
         REPO_PRIVATE: ${{ github.event.repository.private }}
       run: |
+        # validate subscription status
         UPSTREAM="chetan/git-restore-mtime-action"
         ACTION_REPO="${GITHUB_ACTION_REPOSITORY:-}"
         DOCS_URL="https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions"
@@ -54,8 +60,6 @@ runs:
           fi
         fi
       shell: bash
-
-    - name: Run git-restore-mtime
-      shell: bash
+    - shell: bash
       run: |
-        cd "${{ inputs.working-directory }}" && "$GITHUB_ACTION_PATH"/git-restore-mtime
+        cd "${{ inputs.working-directory }}" && "$GITHUB_ACTION_PATH"/git-restore-mtime ${{ inputs.args }}
