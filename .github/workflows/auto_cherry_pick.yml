@@ -1,6 +1,11 @@
 name: Auto Cherry-Pick from Upstream
 
 on:
+  workflow_run:
+    workflows: [ "Release GitHub Actions" ]
+    types:
+      - completed
+
   workflow_dispatch:
     inputs:
       base_branch:
@@ -13,7 +18,7 @@ on:
         default: "cherry-pick"
 
   pull_request:
-    types: [labeled, opened, synchronize]
+    types: [ opened, synchronize, labeled ]
 
 permissions:
   contents: write
@@ -23,10 +28,10 @@ permissions:
 
 jobs:
   cherry-pick:
-    if: github.event_name == 'workflow_dispatch' || contains(fromJson(toJson(github.event.pull_request.labels)).*.name, 'review-required')
-    uses: step-security/reusable-workflows/.github/workflows/auto_cherry_pick.yaml@fix_Verify_cherry_pick-Logic
+    if: (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'workflow_dispatch' || contains(fromJson(toJson(github.event.pull_request.labels)).*.name, 'review-required')
+    uses: step-security/reusable-workflows/.github/workflows/auto_cherry_pick.yaml@v1
     with:
       original-owner: "chetan"
       repo-name: "git-restore-mtime-action"
       base_branch: ${{ inputs.base_branch || 'main' }}
-      mode: ${{ github.event_name == 'pull_request' && 'verify' || inputs.mode }}
+      mode: ${{ github.event_name == 'pull_request' && 'verify' || inputs.mode || 'cherry-pick' }}
