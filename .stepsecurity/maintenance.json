@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "mode": "derivative",
+  "upstream": "chetan/git-restore-mtime-action",
+  "release_version_type": "vx.x.x",
+  "action_type": "composite",
+  "vendor_series_version": "2026.06.1",
+  "last_success": {
+    "upstream_tag": "v2.3",
+    "imported_at": "2026-07-27T07:29:25.715Z"
+  },
+  "last_attempt": {
+    "upstream_tag": "v2.3",
+    "status": "success",
+    "reason": "ok",
+    "at": "2026-07-27T07:29:25.715Z"
+  },
+  "tier": "A",
+  "policy": {
+    "stepwise_imports": true,
+    "skip_dist_from_upstream": true
+  }
+}
